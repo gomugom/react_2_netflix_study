@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axiosUtil from '../api/axios';
 import '../components/css/Row.css';
 import MovieModal from './MovieModal';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
 export default function Row({title,id,fetchUrl,isLargeRow}) {
   
     const [movies, setMovies] = useState([]);
@@ -28,30 +31,52 @@ export default function Row({title,id,fetchUrl,isLargeRow}) {
     <section className='row'>
         <h2>{title}</h2>
         <div className='slider'>
-            <div className='slider_arrow-left'>
+            {/* <div className='slider_arrow-left'>
                 <span className='arrow' onClick={() => {
                     document.getElementById(id).scrollLeft -= window.innerWidth - 80;
                 }}>
                     {"<"}
                 </span>
-            </div>
-            <div id={id} className='row_posters'>
-                {movies.map(movie => {
-                    <img key={movie.id}
-                         className={`row_poster ${isLargeRow && "row_posterLarge"}`}
-                         src={`https://image.tmdb.org/t/p/original/${isLargeRow ? movie.poster_path : movie.backdrop_path}`}     
-                         alt={movie.name}
-                         onClick={() => handleClick(movie)}
-                    />
-                })}
-            </div>
-            <div className='slider_arrow-right' onClick={() => {
+            </div> */}
+            <Swiper
+                // spaceBetween={50}
+                slidesPerView={5}
+                loop={true}
+                breakpoints={{
+                    1378: {
+                        slidesPerView: 6,
+                        slidersPerGroup: 6
+                    },
+                    998: {
+                        slidesPerView: 5,
+                        slidersPerGroup: 5
+                    },
+                    625: {
+                        slidesPerView: 3,
+                        slidersPerGroup: 3
+                    }
+                }}
+            >
+                <div id={id} className='row_posters'>
+                    {movies.map(movie => {
+                        <SwiperSlide>
+                            <img key={movie.id}
+                                className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+                                src={`https://image.tmdb.org/t/p/original/${isLargeRow ? movie.poster_path : movie.backdrop_path}`}     
+                                alt={movie.name}
+                                onClick={() => handleClick(movie)}
+                            />
+                        </SwiperSlide>
+                    })}
+                </div>
+            </Swiper>
+            {/* <div className='slider_arrow-right' onClick={() => {
                 document.getElementById(id).scrollLeft += window.innerWidth - 80;
             }}>
                 <span className='arrow'>
                     {">"}
                 </span>
-            </div>
+            </div> */}
         </div>
 
         {

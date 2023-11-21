@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import "./movieModal.css"
 
 export default function MovieModal({
@@ -11,10 +11,17 @@ export default function MovieModal({
     vote_average,
     setModalOpen
 }) {
+    
+    // document.getElementById처럼 React에서 DOM을 가져올 때 사용
+    const ref = useRef(null);
+    useOnClickOutside(ref, () => {
+        setModalOpen(false);
+    });
+
   return (
     <div className='presentation'>
         <div className='wrapper-modal'>
-            <div className='modal'>
+            <div className='modal' ref={ref}>
                 <span onClick={() => setModalOpen(false)} className='modal-close'>
                     x
                 </span>
