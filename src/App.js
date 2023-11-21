@@ -9,7 +9,7 @@ import MainPage from './pages/MainPage';
 import DetailPage from './pages/DetailPage';
 import SearchPage from './pages/SearchPage';
 
-const layout = () => {
+const Layout = () => {
   return(
     <div>
       <Nav />

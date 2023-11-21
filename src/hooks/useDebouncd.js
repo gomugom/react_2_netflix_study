@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 /*
     입력시마다 계속 영화를 검색하게 되면 여러명이 사용하게 될 때 부하가 서버에 많이 걸릴 수 있다.
