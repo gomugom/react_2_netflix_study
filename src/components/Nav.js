@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './css/Nav.css';
+import { useNavigate } from 'react-router-dom';
 
 export const Nav = React.memo(() => {
 
@@ -17,6 +18,7 @@ export const Nav = React.memo(() => {
     */
 
     const [show, setShow] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
 
     // component가 mount될 때 event가 등록되고 unmount될 때 event 해제되면 됨
     useEffect(() => {
@@ -33,6 +35,14 @@ export const Nav = React.memo(() => {
         }
     }, []); // mount, unmount시에만 동작하면 됨
 
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setSearchValue(e.target.value);
+        navigate(`/search?q=${e.target.value}`);
+    }
+    
+
   return (
     <nav className={`nav ${show && "nav_black"}`}>
         <img 
@@ -41,6 +51,9 @@ export const Nav = React.memo(() => {
             className='nav_logo'
             onClick = {() => window.location.reload()}
         />
+
+        <input value={searchValue} onChange={handleChange} className='nav_input' type="text" placeholder='검색어를 입력하세요.' />
+
         <img 
             alt="User logged"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/170px-Netflix_2015_logo.svg.png"

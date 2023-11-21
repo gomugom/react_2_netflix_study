@@ -29,3 +29,14 @@
 .nav_black {
     background-color: #111;
 }
+
+.nave_input {
+    position: fixed;
+    left:50%;
+    transform: translate(-50%, 0);
+    background-color: rgb(37, 36, 36);
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    border: none;
+}
